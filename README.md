@@ -1,27 +1,10 @@
-# AskEinkBro: EinkBro Highlight Plugin for KOReader
+# Fork of [AskEinkBro](https://github.com/einkbro/askeinkbro) and replace with eudic (欧路词典) button
 
-Introducing AskEinkBro, a new plugin for KOReader that allows you to search about the parts of the book you're reading and see results in EinkBro in one step.
+When long pressing a word, instead of showing Query EinkBro, it shows Query Eudic.
 
-## Demo
+This is helpful that we can call Eudic directly from the Dictionary Lookup Menu:
 
-
-https://github.com/einkbro/askeinkbro/assets/4084738/039cbc73-6080-4059-983c-4e2a60c4e33f
-
-
-## Getting Started
-
-To use this plugin, You'll need to do a few things:
-
-Get [KoReader](https://github.com/koreader/koreader) installed on your e-reader. You can find instructions for doing this for a variety of devices [here](https://www.mobileread.com/forums/forumdisplay.php?f=276).
-
-If you clone this project, you should be able to rename the directory to `askeinkbro.koplugin`, in the `koreader/plugins` directory and it should work. If you want to use the plugin without cloning the project, you can download the zip file from the releases page and extract the `askeinkbro.koplugin` directory to the `koreader/plugins` directory.
-
-## How To Use
-
-To use AskEinkBro, simply highlight the text that you want to search about, and select "Query EinkBro" from the menu. The plugin will then send your highlighted text to EinkBro, and display the web content.
-
-## Contributions to 
-It's referenced from [AskGPT](https://github.com/drewbaumann/AskGPT) plugin with some code study in Koreader project.
+![Screenshot_2023-09-24-15-51-46-650_org koreader launcher fdroid](https://github.com/chenyanming/askeinkbro/assets/3462132/c330642f-be85-4696-86e2-7be3b4138383)
 
 
 License: GPLv3

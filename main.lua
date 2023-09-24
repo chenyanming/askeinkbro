@@ -9,33 +9,6 @@ local AskGPT = InputContainer:new {
   is_doc_only = true,
 }
 
-local external = require("device/thirdparty"):new{
-  dicts = {
-      { "Aard2", "Aard2", false, "itkach.aard2", "aard2" },
-      { "Alpus", "Alpus", false, "com.ngcomputing.fora.android", "search" },
-      { "ColorDict", "ColorDict", false, "com.socialnmobile.colordict", "send" },
-      { "Eudic", "Eudic", false, "com.eusoft.eudic", "send" },
-      { "EudicPlay", "Eudic (Google Play)", false, "com.qianyan.eudic", "send" },
-      { "Fora", "Fora Dict", false, "com.ngc.fora", "search" },
-      { "ForaPro", "Fora Dict Pro", false, "com.ngc.fora.android", "search" },
-      { "GoldenFree", "GoldenDict Free", false, "mobi.goldendict.android.free", "send" },
-      { "GoldenPro", "GoldenDict Pro", false, "mobi.goldendict.android", "send" },
-      { "Kiwix", "Kiwix", false, "org.kiwix.kiwixmobile", "text" },
-      { "LookUp", "Look Up", false, "gaurav.lookup", "send" },
-      { "LookUpPro", "Look Up Pro", false, "gaurav.lookuppro", "send" },
-      { "Mdict", "Mdict", false, "cn.mdict", "send" },
-      { "QuickDic", "QuickDic", false, "de.reimardoeffinger.quickdic", "quickdic" },
-      { "EinkBro", "EinkBro", false, "info.plateaukao.einkbro", "text" },
-  },
-  check = function(self, app)
-      return android.isPackageEnabled(app)
-  end,
-}
-
-local function getExternalDictLookupList(self) 
-  return external.dicts 
-end
-
 local doExternalDictLookup = function (self, text, method, callback)
   external.when_back_callback = callback
   local _, app, action = external:checkMethod("dict", method)
@@ -55,17 +28,13 @@ function AskGPT:init()
       end,
     }
   end)
-  Device.getExternalDictLookupList = getExternalDictLookupList
   Device.doExternalDictLookup = doExternalDictLookup
-  -- DictQuickLookup.onHoldClose = function(self) 
-  --   android.dictLookup(self.displayword, "info.plateaukao.einkbro", "text")
-  --   end
   local originalTweakButtonsFunc = DictQuickLookup.tweak_buttons_func
   DictQuickLookup.tweak_buttons_func = function(obj, buttons)
     if originalTweakButtonsFunc then originalTweakButtonsFunc(obj, buttons) end
     local isButtonInserted = false
     for _, button in ipairs(buttons) do
-        if button.text == "Query EinkBro" then
+        if button.text == "Query Eudic" then
             isButtonInserted = true
             break
         end
@@ -73,11 +42,11 @@ function AskGPT:init()
     if not isButtonInserted and not obj.is_wiki then
       table.insert(buttons, {
           {
-              text = "Query EinkBro",
+              text = "Query Eudic",
               enabled = true,
               callback = function()
-                  android.dictLookup(obj.word, "info.plateaukao.einkbro", "text")
-                  obj:onClose()
+                android.dictLookup(obj.word, "com.eusoft.eudic", "text")
+                obj:onClose()
               end,
           }
       })
